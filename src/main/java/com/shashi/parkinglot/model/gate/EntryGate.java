@@ -1,6 +1,7 @@
 package com.shashi.parkinglot.model.gate;
 
 import com.shashi.parkinglot.model.DisplayBoard;
+import com.shashi.parkinglot.model.ParkingLot;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -20,5 +21,9 @@ public class EntryGate extends Gate{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "display_board_id")
     private DisplayBoard displayBoard;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "parking_lot_id")
+    private ParkingLot parkingLot;
 
 }

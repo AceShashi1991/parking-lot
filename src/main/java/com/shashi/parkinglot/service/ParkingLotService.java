@@ -4,7 +4,6 @@ import com.shashi.parkinglot.dto.ParkingLotRequest;
 import com.shashi.parkinglot.model.*;
 import com.shashi.parkinglot.model.gate.EntryGate;
 import com.shashi.parkinglot.model.gate.ExitGate;
-import com.shashi.parkinglot.repository.EntryGateRepo;
 import com.shashi.parkinglot.repository.ParkingLotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class ParkingLotService {
     private ParkingFloorService parkingFloorService;
 
     @Autowired
-    private ExitGaService exitGaService;
+    private ExitGateService exitGateService;
 
     @Autowired
     private DisplayBoardService displayBoardService;
@@ -46,10 +45,10 @@ public class ParkingLotService {
 
     public ParkingLot createParkingLot(ParkingLotRequest request) {
         ParkingLot parkingLot = getParkingLot(request);
-        exitGaService.createGates(parkingLot.getExitGate());
+        exitGateService.createGates(parkingLot.getExitGate());
         entryGateService.createGates(parkingLot.getEntryGate());
         displayBoardService.creteDisplayBoard(parkingLot.getDisplayBoard());
-        parkingFloorService.createParkingFloors(parkingLot.getParkingFloorList());
+        parkingFloorService.createParkingFloors(parkingLot.getParkingFloor());
         return parkingLotRepo.save(parkingLot);
 
     }
@@ -58,7 +57,7 @@ public class ParkingLotService {
         return  ParkingLot.builder()
                 .name(request.getName())
                 .address(request.getAddress())
-                .parkingFloorList(getParkingFloors(request.getNoOfFloors(), request.getNoOfSpotsPerFloor()))
+                .parkingFloor(getParkingFloors(request.getNoOfFloors(), request.getNoOfSpotsPerFloor()))
                 .entryGate(getEntryGates(request.getNoOfEntryGates()))
                 .exitGate(getExitGates(request.getNoOfExitGates()))
                 .displayBoard(DisplayBoard.builder()
@@ -77,7 +76,7 @@ public class ParkingLotService {
         ArrayList<ParkingFloor> parkingFloors = new ArrayList<>();
         for(int i=1;i<=floors;i++){
             parkingFloors.add(ParkingFloor.builder()
-                            .parkingSpotList(getParkingSpots(spots))
+                            .parkingSpots(getParkingSpots(spots))
                             .floorNumber(i)
                             .paymentCounter(PaymentCounter.builder()
                                     .name("PC-"+i).build())

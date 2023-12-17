@@ -23,23 +23,27 @@ public class ParkingLot extends BaseEntity{
     private String address;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ParkingFloor> parkingFloorList = new ArrayList<>();
+    @JoinTable(name = "PARKING_LOT_PARKING_FLOOR ",
+            joinColumns = {@JoinColumn(name = "PARKING_LOT_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "FLOOR_ID", referencedColumnName = "ID")})
+    private List<ParkingFloor> parkingFloor = new ArrayList<>();
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "PARKING_LOT_ENTRY_GATE ",
+            joinColumns = {@JoinColumn(name = "PARKING_LOT_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ENTRY_GATE_ID", referencedColumnName = "ID")})
     private  List<EntryGate> entryGate = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "PARKING_LOT_EXIT_GATE ",
+            joinColumns = {@JoinColumn(name = "PARKING_LOT_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "EXIT_GATE_ID", referencedColumnName = "ID")})
     private List<ExitGate> exitGate = new ArrayList<>();
-
-
 
     @OneToOne
     @JoinColumn(name = "display_board_id")
     private DisplayBoard displayBoard;
 
-    public void setId(Long id){
-        super.setId(id);
-    }
 
 }

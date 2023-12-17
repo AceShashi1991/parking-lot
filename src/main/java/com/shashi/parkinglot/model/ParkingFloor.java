@@ -16,8 +16,12 @@ public class ParkingFloor extends BaseEntity{
 
     private Integer floorNumber;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "parking_lot_id")
+    private ParkingLot parkingLot;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "parkingFloor")
-    private List<ParkingSpot> parkingSpotList = new ArrayList<>();
+    private List<ParkingSpot> parkingSpots = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "display_board_id")

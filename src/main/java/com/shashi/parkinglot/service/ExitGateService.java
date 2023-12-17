@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ExitGaService {
+public class ExitGateService {
 
     @Autowired
     private ExitGateRepo exitGateRepo;
@@ -19,5 +20,9 @@ public class ExitGaService {
 
     public List<ExitGate> createGates(List<ExitGate> gates){
         return exitGateRepo.saveAll(gates);
+    }
+
+    public Optional<ExitGate> getExitGateById(Long id) {
+        return exitGateRepo.findById(id);
     }
 }

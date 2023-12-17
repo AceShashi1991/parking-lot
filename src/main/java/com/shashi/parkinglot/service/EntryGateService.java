@@ -1,7 +1,6 @@
 package com.shashi.parkinglot.service;
 
 import com.shashi.parkinglot.model.gate.EntryGate;
-import com.shashi.parkinglot.model.gate.ExitGate;
 import com.shashi.parkinglot.repository.EntryGateRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

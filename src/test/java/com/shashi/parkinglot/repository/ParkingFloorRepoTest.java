@@ -26,7 +26,7 @@ class ParkingFloorRepoTest {
                         .spotStatus(SpotStatus.AVAILABLE).build());
         ParkingFloor parkingFloor = ParkingFloor.builder()
                 .floorNumber(1)
-                .parkingSpotList(spotList)
+                .parkingSpots(spotList)
                 .displayBoard(DisplayBoard.builder().build())
                 .paymentCounter(paymentCounter)
                 .build();
@@ -38,7 +38,7 @@ class ParkingFloorRepoTest {
         assertEquals(parkingFloor.getFloorNumber(),1);
         assertNotNull(parkingFloor.getDisplayBoard());
         assertNotNull(parkingFloor.getPaymentCounter());
-        assertEquals(2,parkingFloor.getParkingSpotList().size());
+        assertEquals(2,parkingFloor.getParkingSpots().size());
     }
 
 }
